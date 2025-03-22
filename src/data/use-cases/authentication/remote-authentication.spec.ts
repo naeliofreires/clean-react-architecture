@@ -1,5 +1,6 @@
 import { HttpPostClient } from '@/data/protocols/http/HttpPostClient'
 import { RemoteAuthentication } from './remote-authentication'
+import { faker } from '@faker-js/faker'
 
 class HttpPostClientSpy implements HttpPostClient {
   url?: string
@@ -12,8 +13,7 @@ class HttpPostClientSpy implements HttpPostClient {
 
 describe('RemoteAuthentication', () => {
   it('should call HttpPostClient with correct URL', async () => {
-    const url = 'any+url+value'
-
+    const url = faker.internet.url()
     const httpPostClientSpy = new HttpPostClientSpy()
     const sut = new RemoteAuthentication(url, httpPostClientSpy)
 
