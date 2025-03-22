@@ -1,10 +1,11 @@
 import { HttpPostClient, HttpPostParams } from '@/data/protocols/http/HttpPostClient'
 import { RemoteAuthentication } from './remote-authentication'
 import { faker } from '@faker-js/faker'
+import { AuthenticationParams } from '@/domain/use-cases/authentication'
 
 class HttpPostClientSpy implements HttpPostClient {
   url?: string
-  body?: any
+  body?: object
 
   async post(params: HttpPostParams): Promise<any> {
     this.url = params.url
@@ -27,7 +28,7 @@ describe('RemoteAuthentication', () => {
 
   it('should call HttpPostClient with correct body', async () => {
     const url = faker.internet.url()
-    const body = {
+    const body: AuthenticationParams = {
       email: faker.internet.email(),
       password: faker.internet.password()
     }
